@@ -60,7 +60,6 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://localhost:8080",
-        "https://cyber-ai-simulation.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -313,58 +312,3 @@ def analyze(request: ChatRequest):
 실제 행동:
 - 분석 요청을 보냈지만 서버 오류로 결과를 받지 못했습니다."""
         }
-
-class AuthRequest(BaseModel):
-    username: str
-    login_id: str
-    password: str
-
-
-@app.post("/signup")
-def signup(request: AuthRequest):
-    db = SessionLocal()
-
-    try:
-        existing_user = db.query(User).filter(User.login_id == request.login_id).first()
-
-        if existing_user:
-            return {"success": False, "message": "이미 사용 중인 아이디입니다."}
-
-        user = User(
-            username=request.username,
-            login_id=request.login_id,
-            password=request.password,
-        )
-
-        db.add(user)
-        db.commit()
-
-        return {"success": True, "message": "회원가입 성공"}
-
-    finally:
-        db.close()
-
-
-@app.post("/login")
-def login(request: AuthRequest):
-    db = SessionLocal()
-
-    try:
-        user = db.query(User).filter(
-            User.login_id == request.login_id,
-            User.password == request.password
-        ).first()
-
-        if not user:
-            return {"success": False, "message": "아이디 또는 비밀번호가 올바르지 않습니다."}
-
-        return {
-            "success": True,
-            "message": "로그인 성공",
-            "username": user.username,
-            "login_id": user.login_id,
-            "user_id": user.id,
-        }
-
-    finally:
-        db.close()
