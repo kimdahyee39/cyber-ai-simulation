@@ -18,12 +18,8 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(DATABASE_URL)
-Base.metadata.create_all(bind=engine)
 SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
-
-Base.metadata.create_all(bind=engine)
-
 
 class User(Base):
     __tablename__ = "users"
@@ -54,6 +50,9 @@ class Scenario(Base):
     level = Column(String(50))
     category = Column(String(100))
     intro_messages = Column(Text)
+
+
+Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI()
