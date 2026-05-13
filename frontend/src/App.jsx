@@ -296,7 +296,7 @@ const sendMessage = async () => {
   setInput("");
 
   try {
-    const response = await fetch("http://localhost:8000/ai/chat", {
+    const response = await fetch("https://cyber-ai-simulation-production.up.railway.app/scenarios", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -455,7 +455,7 @@ export default function App() {
   const [radarData, setRadarData] = useState([]);
 
   useEffect(() => {
-  fetch("http://localhost:8000/scenarios")
+  fetch("https://cyber-ai-simulation-production.up.railway.app/scenarios")
     .then(res => res.json())
     .then(data => {
       setScenarios(data);
@@ -486,7 +486,7 @@ const handleAnalyze = async (messages) => {
   setStep(3);
 
   try {
-    const response = await fetch("http://localhost:8000/ai/analyze", {
+    const response = await fetch("https://cyber-ai-simulation-production.up.railway.app/scenarios", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
