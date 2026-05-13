@@ -486,7 +486,7 @@ const handleAnalyze = async (messages) => {
   setStep(3);
 
   try {
-    const response = await fetch("https://cyber-ai-simulation-production.up.railway.app/analyze", {
+    const response = await fetch("https://cyber-ai-simulation-production.up.railway.app/ai/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
