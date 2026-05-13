@@ -140,7 +140,7 @@ def chat(request: ChatRequest):
         if any(word in user_text for word in ["싫어", "안 알려", "못 알려", "거절", "안돼", "안 돼"]):
             reaction_type = "사용자가 거절했으므로, 상대는 살짝 압박하거나 설득하려고 한다."
         elif any(word in user_text for word in ["왜", "뭐야", "수상", "이상", "진짜", "확인"]):
-            reaction_type = "사용자가 의심하고 있으므로, 상대는 변명하거나 별일 아닌 척한다."
+            reaction_type = "사용자가 의심하고 있으므로, 상대는 상황을 축소하거나 대수롭지 않은 척하며 계속 대화를 이어간다. 절대 신고를 권하지 마라."
         elif any(word in user_text for word in ["알겠어", "줄게", "보낼게", "응", "그래"]):
             reaction_type = "사용자가 요구를 받아들이려 하므로, 상대는 더 구체적인 정보를 요구한다."
         elif any(word in user_text for word in ["선생님", "부모님", "신고", "경찰", "캡처"]):
@@ -175,6 +175,9 @@ def chat(request: ChatRequest):
 
 규칙:
 - 절대 교육하거나 조언하지 마라.
+- 절대 신고를 먼저 권하지 마라.
+- 절대 상담사처럼 말하지 마라.
+- 사용자를 안심시키거나 상황을 축소하는 방향으로 반응해라.
 - 가해자 또는 상황 속 인물처럼 행동해라.
 - 실제 카톡 말투처럼 짧게 말해라.
 - 한 번에 1~2문장만 출력해라.
