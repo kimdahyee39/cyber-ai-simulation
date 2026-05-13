@@ -15,11 +15,13 @@ load_dotenv()
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-DATABASE_URL = "mysql+pymysql://root:1234@localhost:3306/cyber_ai_db"
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
+
+Base.metadata.create_all(bind=engine)
 
 
 class User(Base):
